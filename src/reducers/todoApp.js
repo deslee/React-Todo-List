@@ -1,17 +1,24 @@
 import { ADD_TASK, COMPLETE_TASK, INCOMPLETE_TASK, CLEAR_COMPLETED_TASKS } from "../actions/taskActions";
+import moment from 'moment';
 
 const initialState = {
-    '2018-10-30T06:50:26.875Z': {
+    [moment().subtract(7, 'm').toDate().toISOString()]: {
+        id: moment().subtract(7, 'm').toDate().toISOString(),
         text: 'Task 1',
-        date: '2018-10-30T06:50:26.875Z'
+        date: moment().subtract(7, 'm').toDate().toISOString(),
+        finished: false
     },
-    '2018-10-30T06:50:28.260Z': {
+    [moment().subtract(5, 'm').toDate().toISOString()]: {
+        id: moment().subtract(5, 'm').toDate().toISOString(),
         text: 'Task 2',
-        date: '2018-10-30T06:50:28.260Z'
+        date: moment().subtract(5, 'm').toDate().toISOString(),
+        finished: false
     },
-    '2018-10-30T06:50:29.408Z': {
+    [moment().subtract(3, 'm').toDate().toISOString()]: {
+        id: moment().subtract(3, 'm').toDate().toISOString(),
         text: 'Task 3',
-        date: '2018-10-30T06:50:29.408Z'
+        date: moment().subtract(3, 'm').toDate().toISOString(),
+        finished: false
     }
 }
 
@@ -22,6 +29,7 @@ export default function todoApp(state = initialState, action) {
                 ...state,
                 [action.payload.id]: {
                     text: action.payload.value,
+                    date: action.payload.date,
                     finished: false
                 }
             }

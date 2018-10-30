@@ -2,6 +2,7 @@ import React from 'react';
 import TodoItem from './TodoItem';
 import styles from './TodoList.module.css';
 import classNames from 'classnames';
+import FlipMove from 'react-flip-move';
 
 const sortTasks = tasks => (a, b) => {
     if (tasks[a].finished && !tasks[b].finished) {
@@ -14,6 +15,7 @@ const sortTasks = tasks => (a, b) => {
 }
 
 export default ({ tasks, onCompleteTask, onIncompleteTask, className }) => <ul className={classNames(styles.todoList, className)}>
+    <FlipMove>
     {
         Object.keys(tasks).sort(sortTasks(tasks)).map((id) => (
             <TodoItem
@@ -24,4 +26,5 @@ export default ({ tasks, onCompleteTask, onIncompleteTask, className }) => <ul c
             />
         ))
     }
+    </FlipMove>
 </ul>

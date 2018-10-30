@@ -9,6 +9,7 @@
 }
 
 .controls {
+    margin: .5rem 0 0;
     display: flex;
 }
 
