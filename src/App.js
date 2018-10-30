@@ -25,7 +25,7 @@ const App = ({
         <AddTask onAddTask={addTask} />
         <TodoList className={styles.todoList} tasks={tasks} onCompleteTask={markTaskAsComplete} onIncompleteTask={markTaskAsIncomplete} />
         <div className={styles.controls}>
-            <button className={formStyles.button} onClick={clearCompletedTasks}>Clear finished</button>
+            <button className={formStyles.button} disabled={Object.keys(tasks).filter(id => tasks[id].finished).length === 0} onClick={clearCompletedTasks}>Clear finished</button>
             <span className={styles.status}>Remaining: {Object.keys(tasks).filter(id => !tasks[id].finished).length}</span>
         </div>
     </div>
