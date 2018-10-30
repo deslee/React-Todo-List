@@ -1,0 +1,31 @@
+.button {
+    padding: 1rem;
+    border: 1px solid lightgray;
+    background: white;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.button:hover, .button:focus {
+    outline: none;
+    border: 1px solid darkgray;
+    background: lightgray;
+}
+
+.textInput {
+    padding: 1rem;
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1rem;
+    outline: none;
+    border: 1px solid darkgray;
+}
+
+.textInput.error { 
+    border: 1px solid red;
+}
+
+.feedback {
+    margin: .5rem .25rem;
+    color: red;
+}

@@ -1,17 +1,27 @@
 import React from 'react';
 import TodoItem from './TodoItem';
-import './TodoList.css';
+import styles from './TodoList.module.css';
+import classNames from 'classnames';
 
-class TodoList extends React.Component {
-    render() {
-        const tasks = this.props.tasks;
-        const listItems = tasks.map((task, index) =>
-            <TodoItem keyValue={index} value={task} />
-        );
-        return (
-            <ul className='TodoList'>{listItems}</ul>
-        );
+const sortTasks = tasks => (a, b) => {
+    if (tasks[a].finished && !tasks[b].finished) {
+        return 1;
+    } else if (!tasks[a].finished && tasks[b].finished) {
+        return -1;
+    } else {
+        return new Date(tasks[a].date) - new Date(tasks[b].date)
     }
 }
 
-export default TodoList;
+export default ({ tasks, onCompleteTask, onIncompleteTask, className }) => <ul className={classNames(styles.todoList, className)}>
+    {
+        Object.keys(tasks).sort(sortTasks(tasks)).map((id) => (
+            <TodoItem
+                key={id}
+                {...tasks[id]}
+                onCompleteTask={() => onCompleteTask(id)}
+                onIncompleteTask={() => onIncompleteTask(id)}
+            />
+        ))
+    }
+</ul>

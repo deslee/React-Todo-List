@@ -1,0 +1,8 @@
+.form {
+    display: flex;
+}
+
+.textInput {
+    flex: 1;
+    margin-right: .5rem;
+}

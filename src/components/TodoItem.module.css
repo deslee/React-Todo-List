@@ -1,0 +1,21 @@
+.todoItem {
+    list-style: none;
+    margin: 1rem 0;
+    padding: 1rem;
+    border: 1px solid darkgray;
+    cursor: pointer;
+}
+
+.todoItem:hover {
+    background: lightgray;
+}
+
+.finished {
+    text-decoration: line-through;
+}
+
+.finishedText {
+    display: block;
+    color: darkgray;
+    text-align: right;
+}

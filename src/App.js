@@ -1,30 +1,37 @@
 import React from 'react';
 import AddTask from './components/AddTask';
+import { connect } from 'react-redux';
+import { addTask, completeTask, incompleteTask, clearCompletedTasks } from './actions/taskActions';
+import getTasks from './selectors/getTasks';
 import TodoList from './components/TodoList';
+import formStyles from './components/Forms.module.css';
+import styles from './App.module.css';
 
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            tasks: []
-        }
-    }
+const mapStateToProps = (state) => ({
+    tasks: getTasks(state)
+})
+const mapDispatchToProps = (dispatch) => ({
+    addTask: (task) => dispatch(addTask(task)),
+    markTaskAsComplete: (id) => dispatch(completeTask(id)),
+    markTaskAsIncomplete: (id) => dispatch(incompleteTask(id)),
+    clearCompletedTasks: () => dispatch(clearCompletedTasks())
+})
 
-    addTask = (value) => {
-        const tasks = this.state.tasks;
-        this.setState({
-            tasks: tasks.concat(value)
-        });
-    }
+const App = ({
+    addTask, tasks, 
+    markTaskAsComplete, markTaskAsIncomplete, clearCompletedTasks
+}) => (
+    <div className={styles.app}>
+        <AddTask onAddTask={addTask} />
+        <TodoList className={styles.todoList} tasks={tasks} onCompleteTask={markTaskAsComplete} onIncompleteTask={markTaskAsIncomplete} />
+        <div className={styles.controls}>
+            <button className={formStyles.button} onClick={clearCompletedTasks}>Clear finished</button>
+            <span className={styles.status}>Remaining: {Object.keys(tasks).filter(id => !tasks[id].finished).length}</span>
+        </div>
+    </div>
+)
 
-    render() {
-        return (
-            <div>
-                <AddTask addTask={this.addTask} />
-                <TodoList tasks={this.state.tasks} />
-            </div>
-        );
-    }
-}
-
-export default App;
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(App);

@@ -1,0 +1,19 @@
+.app {
+    margin: 2rem auto;
+    max-width: 500px;
+}
+
+.todoList {
+    margin-top: 2rem;
+    border-top: 1px dotted lightgray;
+}
+
+.controls {
+    display: flex;
+}
+
+.status {
+    padding: 1rem 0;
+    flex: 1;
+    text-align: right;
+}
